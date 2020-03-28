@@ -93,4 +93,28 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+
+
+  # Do not dump schema after migrations.
+  config.action_mailer.default_url_options = { host: 'beeprinted.com.br' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+# SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.zoho.com",
+    :port                 => 465,
+    :domain               => '18.231.117.205',
+    :user_name            => 'contato@beeprinted.com.br',
+    :password             => 'refletores',
+    :authentication       => "login",
+    :enable_starttls_auto => true,
+    :ssl                  => true,
+    :tls                  => true
+  }
+
+
+
+
 end
