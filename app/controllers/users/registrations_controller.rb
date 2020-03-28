@@ -55,7 +55,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(users)
     @admins = User.where(admin: true)
     @admins.each do |admin|
-      NovoCadastroMailer.novo_contato_email(current_user,admin).deliver
+      NovoCadastroMailer.novo_cadastro_email(current_user,admin).deliver
     end
     initial_path
   end
