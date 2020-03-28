@@ -16,7 +16,7 @@ class UserController < ApplicationController
 					@user.admin = true
 				end
 				@user.save
-				LiberacaoMailer.liberacao_email(@user)
+				LiberacaoMailer.liberacao_email(@user).deliver
 				flash[:success] = "Um novo #{@user.relacionamento} foi adicionado ao sistema."
 				redirect_to solicitacoes_path
 			else
