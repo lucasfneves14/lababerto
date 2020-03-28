@@ -1,5 +1,5 @@
 class LiberacaoMailer < ApplicationMailer
-	default from: "contato@beeprinted.com.br"
+	default from: "LabAberto <contato@beeprinted.com.br>"
 
 	def liberacao_email(user)
 		@site = "http://18.230.17.83"
