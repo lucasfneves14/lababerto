@@ -42,7 +42,32 @@
 	                        <td> <span><%=user.created_at.strftime("%d/%m/%Y")%></span> </td>
 	                        <td><span><%= f.input :relacionamento, prompt:"Relacionamento", :collection => ["Administrador", "Colaborador"],label:false,:input_html=>{style:'color:#999;margin-bottom:0px; margin-borrom:0px'} %></span></td>
 	                        <td>
-	                            <%=f.submit "Atualizar", style:"font-weight:bold;font-size:11px;color:white;background-color:orange", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+	                            <%=f.submit "Aprovar", name:"aprovado", style:"font-weight:bold;font-size:11px;color:white;background-color:orange", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+                              <div class='btn btn-default font-bold w3-center' style='font-weight:bold;font-size:11px;color:white;background-color:red' data-toggle="modal" data-target="#ExemploModalCentralizado">Recusar</div>
+
+                              <!-- Modal -->
+                              <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                      <h5 class="modal-title" id="TituloModalCentralizado">Recusar Solicitação</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                      Você tem certeza que deseja recusar a solicitação do(a) <%=user.name%>?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default font-bold w3-center" style='font-weight:bold;font-size:11px;color:white;background-color:gray' data-dismiss="modal">Cancelar</button>
+                                      <%=f.submit "Recusar", name:"recusado", style:"font-weight:bold;font-size:11px;color:white;background-color:red", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+
+
 	                        </td>
 	                    </tr>
 	                <%end%>
@@ -53,6 +78,53 @@
         </div> <!-- /.table-stats -->
 
   	</div>
+
+    <div class='card text-center' style='cursor:pointer;padding:2px;background-color: transparent;margin-bottom:0px' onclick='if($("#recusados").is(":visible")){$("#recusados").slideUp();}else{$("#recusados").slideDown();}'>
+      <strong>Recusados</strong>
+      <i class="fa fa-sort-desc" aria-hidden="true"></i>
+    </div>
+
+    <div class="card" id='recusados' style='display:none'>
+        <div class="table-stats order-table ov-h">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th class="serial">#</th>
+                        <th class="avatar">Avatar</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Data de Entrada</th>
+                        <th>Relacionamento com o LAB</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <%@recusados.each_with_index do |user,index|%>
+                  <%= simple_form_for user, :url => update_solicitacao_path(user.id), html: { multipart: true, class:'' },style:'color:#616161' do |f| %>
+                      <tr>
+                          <td class="serial"><%=index + 1%></td>
+                          <td class="avatar">
+                              <div class="round-img">
+                                  <a href="#"><img class="rounded-circle" src="images/avatar/1.jpg" alt=""></a>
+                              </div>
+                          </td>
+                          <td class="name"><%=user.name%></td>
+                          <td>  <span><%=user.email%></span> </td>
+                          <td> <span><%=user.created_at.strftime("%d/%m/%Y")%></span> </td>
+                          <td><span><%= f.input :relacionamento, prompt:"Relacionamento", :collection => ["Administrador", "Colaborador"],label:false,:input_html=>{style:'color:#999;margin-bottom:0px; margin-borrom:0px'} %></span></td>
+                          <td>
+                              <%=f.submit "Aprovar", name:"aprovado", style:"font-weight:bold;font-size:11px;color:white;background-color:orange", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+
+                          </td>
+                      </tr>
+                  <%end%>
+                    <%end%>
+                                       
+                </tbody>
+            </table>
+        </div> <!-- /.table-stats -->
+
+    </div>
 
   </div>
 

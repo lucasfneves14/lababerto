@@ -97,6 +97,21 @@
         header .form-inline .search-form input[type="text"]::placeholder{
             color:white !important;
         }
+        .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+            border-color: orange;
+            background-color:orange;
+        }
+        .btn-primary{
+            border-color: orange;
+            background-color:orange;
+        }
+        .custom-select.is-valid, .form-control.is-valid, .was-validated .custom-select:valid, .was-validated .form-control:valid {
+            border: 1px solid #ced4da;
+        }
+        .btn-info, .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show>.btn-info.dropdown-toggle, .btn-info:hover{
+            background-color: orange;
+            border-color: orange;
+        }
     </style>
 
 </head>
@@ -111,7 +126,7 @@
                 <ul class="nav navbar-nav">
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                            <i class="menu-icon fa fa-cogs"></i>Pedidos
+                            <i class="menu-icon fa fa-cubes" title='Pedidos'></i>Pedidos
                         </a>
                         <ul class="sub-menu children dropdown-menu">           
                             <li><i class="fa fa-puzzle-piece"></i><a href=<%=root_path%>>Todos</a></li>
@@ -119,7 +134,7 @@
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                            <i class="menu-icon fa fa-users"></i>Colaboradores
+                            <i class="menu-icon fa fa-users" title='Colaboradores'></i>Colaboradores
                         </a>
                         <ul class="sub-menu children dropdown-menu">           
                             <li><i class="fa fa-user-plus"></i><a href=<%=solicitacoes_path%>>Solicitações</a></li>
@@ -220,16 +235,16 @@
                     </div>
 
                     <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="https://beeprinted-stls.s3.amazonaws.com/Plataforma/Profile/user.jpg" alt="User Avatar">
+                        <a href="#" class="dropdown-toggle active user-avatar rounded-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%=profile_avatar_select(current_user)%>
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href=''><i class="fa fa-user"></i>Meu Perfil</a>
+                            <a class="nav-link" href=<%=profile_path(current_user)%>><i class="fa fa-user"></i>Meu Perfil</a>
 
                             <a class="nav-link" href="#"><i class="fa fa-bell-o"></i>Notifications <span class="count">13</span></a>
 
-                            <a class="nav-link" href=''><i class="fa fa-cog"></i>Editar Conta</a>
+                            <a class="nav-link" href=<%=edit_user_registration_path%>><i class="fa fa-cog"></i>Editar Conta</a>
 
                             <%=link_to destroy_user_session_path, class: "nav-link external" do%>
                               <i class="fa fa-power-off"></i>Sair

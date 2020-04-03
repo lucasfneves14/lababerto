@@ -72,13 +72,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :current_password, :matricula, :curso, :telefone, :attachment, :bio)
   end
 
   def resolve_layout
     case action_name
     when "edit"
-      true
+      'system/navbar'
     else
       "users/navbar"
     end

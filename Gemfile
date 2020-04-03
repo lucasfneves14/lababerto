@@ -3,7 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.0'
 
-
+gem 'fog-aws'
+gem 'mini_magick'
+gem 'carrierwave'
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'simple_form', '4.1.0'
 gem 'devise'

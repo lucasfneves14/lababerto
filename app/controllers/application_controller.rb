@@ -8,10 +8,18 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    if session[:previous_url] 
-      session[:previous_url]
+    if current_user.first_time
+      current_user.first_time = false
+      current_user.save
+      flash[:warning] = "Atualize seus dados abaixo antes de prosseguir!"
+      edit_user_registration_path
     else
-      root_path
+
+      if session[:previous_url] 
+        session[:previous_url]
+      else
+        root_path
+      end
     end
   end
 end

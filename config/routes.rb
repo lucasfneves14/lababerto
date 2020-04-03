@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'orders#index'
 
+  get "profile/:id", to: 'user#show', as: :profile
   get 'aguardando-autorizacao', to: 'initial#show', as: :initial
   get 'solicitacoes', to: 'user#solicitacoes', as: :solicitacoes
   patch 'solicitacoes/:id/edit', to: 'user#update_solicitacao', as: :update_solicitacao

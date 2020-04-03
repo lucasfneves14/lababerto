@@ -1,60 +1,106 @@
+<style>
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#input-img-label:hover #image-preview {
+  opacity: 0.3;
+}
+
+#input-img-label:hover .middle {
+  opacity: 1;
+}
+
+
+</style>
+
 <div class="content">
   <div class="animated fadeIn">
     <div class="row">
-      <div class="card" style='width:100%'>
-        <div class="card-header">
-          <strong>Editar</strong> Conta
-        </div>
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <div class="card-body card-block">
-          <div class="row form-group">
-            <div class="col col-md-3"><label for="exampleInputName2" class="pr-1  form-control-label">Email</label></div>
-            <div class="col-12 col-md-9"><%= f.input :email,required: true, label:false%></div>
-          </div>
-          <h4><strong>Mudar Senha</strong></h4>
-          <p>Deixe em branco caso nao queira mudá-la.</p>
-          <hr>
-          <div class="row form-group">
-            <div class="col col-md-3"><label for="exampleInputName2" class="pr-1  form-control-label">Nova Senha</label></div>
-            <div class="col-12 col-md-9"><%= f.input :password,
-                hint: "Deixe em branco caso nao queira mudá-la.",
-                required: false,
-                input_html: { autocomplete: "new-password" },label: false %></div>
-          </div>
-          <div class="row form-group">
-            <div class="col col-md-3"><label for="exampleInputName2" class="pr-1  form-control-label">Confirmar Nova Senha</label></div>
-            <div class="col-12 col-md-9"><%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" },label: false %></div>
-          </div>
-          <hr>
-          <div class="row form-group">
-            <div class="col col-md-3"><label for="exampleInputName2" class="pr-1  form-control-label">Senha Atual</label></div>
-            <div class="col-12 col-md-9"><%= f.input :current_password,
-                hint: "Precisamos da sua senha atual para confirmar as mudanças!",
-                required: true,
-                input_html: { autocomplete: "current-password" }, label: false %></div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <%= f.button :submit, "Atualizar Conta",class:"btn btn-primary btn-sm", style:'background-color:orange'%>
+      <div class="card" style='margin:auto'>
+                            <div class="card-header">
+                                <strong class="card-title">Dados Pessoais</strong>
+                            </div>
+                            <div class="card-body">
+                                <!-- Credit Card -->
+                                <div id="pay-invoice">
+                                    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                                    <div class="card-body">
+                                      <div class='form-group'>
+                                        <div style='height:150px; width:150px;margin:auto'>
+                                            <label for="user_attachment" id='input-img-label' style='cursor:pointer;position:relative'>
+                                                <%=profile_avatar_select(f.object)%>
+                                                <div class="middle">
+                                                    <i class="fa fa-cloud-upload" aria-hidden="true" style='font-size:52px;color:orange'></i>
+                                                </div>
+                                            </label>
+                                        </div>
+                                         <%= f.input :attachment,required: true, label:false, input_html:{onChange: " $('#input-img-label').children('#image-preview').attr('src',  window.URL.createObjectURL(this.files[0]))", style:'display:none'}%>
+                                      </div>
 
-          <%= link_to "Cancelar", :back, class:"btn btn-sm" %>
-        </div>
-        <%end%>
-      </div>
-    </div>
-    <div class="row">
-      <div class="card" style='width:100%'>
-        <div class="card-header">
-          <strong>Cancelar </strong>minha Conta
-        </div>
-        <div class="card-body card-block">
-            <div class="row form-group mx-auto d-block text-sm-center">
-              <%= button_to "Cancelar minha Conta", registration_path(resource_name), data: { confirm: "Você tem certeza que quer cancelar sua conta?" }, method: :delete, class:'external btn btn-danger btn-sm text-sm-center' %>
-            </div>
-        </div>
-      </div>
+                                        <div class="card-title text-center">
+                                            <%= f.input :name,required: true, label:false, input_html:{style:'text-align:center;font-size: 1.75rem;border:none'}%>
+                                        </div>
+                                        <hr style="margin-top:-0.5rem">
+                                        <div>
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Email</label>
+                                                <%= f.input :email,required: true, label:false%>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-name" class="control-label mb-1">Matrícula</label>
+                                                <%= f.input :matricula,required: true, label:false%>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Curso</label>
+                                                <%= f.input :curso,required: true, label:false%>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Telefone</label>
+                                                        <%= f.input :telefone,required: true, label:false%>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="x_card_code" class="control-label mb-1">Relacionamento</label>
+                                                    <div class="input-group">
+                                                        <%= f.input :relacionamento,required: true, label:false, input_html:{readonly: true }%>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Bio</label>
+                                                <%= f.input :bio,required: true, label:false%>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Senha</label>
+                                                <%= f.input :current_password,
+                                                    hint: "Precisamos da sua senha atual para confirmar as mudanças!",
+                                                    required: true,
+                                                    input_html: { autocomplete: "current-password" }, label: false %>
+                                            </div>
+                                            <hr>
+                                            <div>
+                                            <%= f.button :submit, "Atualizar Conta",class:"btn btn-lg btn-info btn-block"%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%end%>
+                                </div>
+
+                            </div>
+                        </div> <!-- .card -->
     </div>
   </div>
 </div>
