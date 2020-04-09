@@ -114,7 +114,12 @@ Rails.application.configure do
     :tls                  => true
   }
 
-
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  email: {
+    email_prefix: "[PREFIX] ",
+    sender_address: %{"LabSystem" <contato@beeprinted.com.br>},
+    exception_recipients: %w{lucas@beeprinted.com.br}
+  }
 
 
 end
