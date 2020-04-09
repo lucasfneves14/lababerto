@@ -24,6 +24,7 @@ class FilamentosController < ApplicationController
 		else
 			flash.now[:alert] = "Não foi possível cadastrar o filamento, por favor cheque o formulário!"
 			@filamentos = Filamento.all
+			@groups = @filamentos.group_by(&:material)
 			@rollback = true
 			render :index
 		end

@@ -38,7 +38,7 @@
           </button>
           <h5 class="modal-title" id="TituloModalCentralizado">Adicionar Impressora</h5>
         </div>
-        <%= render 'form', printer: @printer_new %>
+        <%= render 'printers/form', printer: @printer_new %>
       </div>
     </div>
   </div>
@@ -51,7 +51,6 @@
         <%@printers.each do |printer|%>
           <%if printer == @printer%>
             <%= render 'printer_card', printer: @printer %>
-            <%puts 'bllllllllllllllllllllllllllllllllllllllllllllllllllle'%>
           <%else%>
             <%= render 'printer_card', printer: printer %>
           <%end%>

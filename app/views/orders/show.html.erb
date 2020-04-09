@@ -428,7 +428,7 @@ ul {
                       </button>
                       <h5 class="modal-title" id="TituloModalCentralizado">Editar Pedido</h5>
                     </div>
-                    <%= render 'form',order: @order %>
+                    <%= render 'orders/form',order: @order %>
                   </div>
                 </div>
               </div>
@@ -491,7 +491,7 @@ ul {
                         </li>
                         <li class="Top-Hat__tab Top-Hat__tab--stacked"> 
                           <span class="Top-Hat__tab__link"> 
-                            <span class="Top-Hat__tab__title"><strong><%=item.printings.sum(&:quantidade)%> impresso(s)</strong></span> 
+                            <span class="Top-Hat__tab__title"><strong><%=item.printings.where(status: 'Finalizado').sum(&:quantidade)%> impresso(s)</strong></span> 
                           </span> 
                         </li> 
                       </ul>
@@ -535,7 +535,11 @@ ul {
                       </button>
                       <h5 class="modal-title" id="TituloModalCentralizado">Editar Peça</h5>
                     </div>
-                    <%= render 'pecas/form', peca: item, order: @order %>
+                    <%if item == @peca %>
+                      <%= render 'pecas/form', peca: @peca, order: @order %>
+                    <%else%>
+                      <%= render 'pecas/form', peca: item, order: @order %>
+                    <%end%>
                   </div>
                 </div>
               </div>
