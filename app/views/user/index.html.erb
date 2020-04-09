@@ -1,0 +1,66 @@
+<style>
+.form-group{
+	margin-bottom: 0px;
+}
+
+
+</style>
+
+<div class="content">
+  <h3>Colaboradores</h3>
+  <hr>
+  <div class="animated fadeIn">
+  	<div class="card">
+  		<div class="card-header">
+            <strong class="card-title">Colaboradores</strong>
+        </div>
+        <div class="table-stats order-table ov-h">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th class="serial">#</th>
+                        <th class="avatar">Avatar</th>
+                        <th>Matrícula</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Curso</th>
+                        <th>Data de Entrada</th>
+                        <th>Relacionamento com o LAB</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<%@users.each_with_index do |user,index|%>
+                	<%= simple_form_for user, :url => update_solicitacao_path(user.id), html: { multipart: true, class:'' },style:'color:#616161' do |f| %>
+	                    <tr>
+	                        <td class="serial"><%=index + 1%></td>
+	                        <td class="avatar">
+	                            <div class="round-img">
+	                                <a href=<%=profile_path(current_user)%>><%=profile_avatar_select(user)%></a>
+	                            </div>
+	                        </td>
+                          <td><%=user.matricula%></td>
+	                        <td class="name"><a href=<%=profile_path(current_user)%>><%=user.name%></a></td>
+	                        <td>  <span><a href=<%=profile_path(current_user)%>><%=user.email%></a></span> </td>
+                          <td><%=user.curso%></td>
+	                        <td> <span><%=user.created_at.strftime("%d/%m/%Y")%></span> </td>
+	                        <td><span><%= f.input :relacionamento, prompt:"Relacionamento", :collection => ["Administrador", "Colaborador"],label:false,:input_html=>{style:'color:#999;margin-bottom:0px; margin-borrom:0px'} %></span></td>
+	                        <td>
+	                            <%=f.submit "Atualizar", name:"aprovado", style:"font-weight:bold;font-size:11px;color:white;background-color:orange", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+
+
+
+	                        </td>
+	                    </tr>
+	                <%end%>
+                    <%end%>
+                                       
+                </tbody>
+            </table>
+        </div> <!-- /.table-stats -->
+
+  	</div>
+
+  </div>
+
+</div>

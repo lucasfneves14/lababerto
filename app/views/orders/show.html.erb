@@ -1,0 +1,655 @@
+<style>
+
+.fotinha{
+  overflow:hidden;
+  height: 120px;
+  width:22%;
+  display: inline-block;
+  position:relative;
+  border:1px solid #bfbfbf;
+  background-color:white;
+}
+
+@media (max-width: 768px){
+  .mySlides{
+  height:auto !important;
+  overflow:hidden;
+  padding:5px !important;
+}
+}
+
+.mySlides{
+  height:600px;
+  overflow:auto;
+}
+li{
+    color:#878787;
+}
+
+
+
+
+</style>
+
+<style>
+
+.Wrapper--justified {
+    text-align: justify;
+    text-justify: distribute;
+    font-size: 0;
+}
+
+.C-User-Sales .Container {
+    overflow: visible;
+}
+
+
+.Sidebar, .User-Sidebar, .Filter-Sidebar {
+    position: relative;
+    vertical-align: top;
+}
+
+.Container--no-padding {
+    padding: 0;
+}
+
+
+.Container {
+    background: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.User-Sidebar__cover-container {
+    height: 90px;
+    position: relative;
+    overflow: hidden;
+}
+
+.User-Sidebar__cover {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 100%;
+}
+
+img {
+    border: 0;
+}
+
+.Avatar--bordered {
+    box-shadow: 0 0 0 2px #ffffff;
+}
+
+
+.Avatar--xlarge {
+    width: 90px;
+    height: 90px;
+}
+
+.Avatar {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 100%;
+    transition: box-shadow 0.1s ease 0s;
+}
+
+.User-Sidebar__avatar {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    margin-left: -45px;
+}
+
+.User-Sidebar__info {
+    padding: 40px 0 30px;
+    text-align: center;
+}
+
+.User-Sidebar__name {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font: 600 24px/20px "Proxima Nova", sans-serif;
+    color: #5b5855;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+.User-Sidebar__since {
+    font: 400 14px "Proxima Nova", sans-serif;
+    color: #7d7a77;
+}
+
+
+.Button, .Pagination li a, .Bag-Button {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0 15px;
+    height: 48px;
+    vertical-align: middle;
+    border-radius: 3px 3px 4px 4px;
+    background: #ffffff;
+    border: 1px solid #e4e1df;
+    border-bottom-width: 3px;
+    outline: 0;
+    color: orange;
+    line-height: 45px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -webkit-appearance: none;
+    transition: background 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s, opacity 0.3s ease 0s;
+}
+
+.Top-Hat--justified {
+    text-align: justify;
+    text-justify: distribute;
+    font-size: 0;
+}
+
+.Top-Hat--with-tab {
+    line-height: 64px;
+}
+
+.Top-Hat {
+    height: 70px;
+    margin-top: 0;
+    margin-bottom: 24px;
+    background: #ffffff;
+    border-radius: 3px;
+    line-height: 70px;
+}
+
+.Top-Hat__column--no-spaced {
+    padding: 0;
+}
+.Top-Hat__column {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+ul, ol {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.Top-Hat__tab {
+    display: inline-block;
+    color: #7d7a77;
+    list-style: none;
+    text-align: left;
+    line-height: 1;
+}
+
+.Top-Hat__tab--stacked .Top-Hat__tab__link {
+    padding: 24px 26px;
+}
+
+.Top-Hat__tab--stacked .Top-Hat__tab__link {
+    padding: 24px 26px;
+}
+.Top-Hat__tab__link {
+    display: inline-block;
+    padding: 9px 26px 2px;
+    color: inherit;
+    transition: color 0.25s ease;
+}
+
+.Top-Hat__tab--stacked .Top-Hat__tab__title {
+    color: #5b5855;
+    padding: 24px 0;
+}
+.Top-Hat__tab--stacked .Top-Hat__tab__title {
+    color: #5b5855;
+    padding: 24px 0;
+}
+.Top-Hat__tab__title {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    transition: color 0.25s ease;
+}
+
+
+.Top-Hat__tab--stacked.is-active .Top-Hat__tab__title {
+    border-bottom: solid 2px orange;
+    color: orange;
+}
+
+
+
+
+
+
+.Container--no-padding {
+    padding: 0;
+}
+
+
+.Product-List {
+    list-style: none;
+}
+
+.Product-List__item {
+    text-align: justify;
+    text-justify: distribute;
+    font-size: 0;
+    display: block;
+    padding: 10px 10px 0;
+    border-bottom: 1px solid #f4f2f0;
+}
+
+.Product-List__wrapper {
+    text-align: justify;
+    text-justify: distribute;
+    font-size: 0;
+    margin-bottom: 10px;
+}
+
+
+.Product-List__column {
+
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.Product-List__image-background {
+    display: inline-block;
+    background: #f4f2f0;
+    border-radius: 3px;
+}
+
+.Product-List__content {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+.Product-List__content__date {
+    margin: 0px;
+    font: 400 14px/16px "Proxima Nova", sans-serif;
+    color: #a6a39f;
+}
+
+.Product-List__content__title {
+    max-width: 280px;
+    margin: 0 0 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font: 600 16px/22px "Proxima Nova", sans-serif;
+    color: #5b5855;
+}
+
+.Product-List__content__title:last-child {
+    margin-bottom: 0;
+}
+
+.Product-List__content__title--highlight {
+    font-weight: 400;
+    color: #f05b78;
+}
+
+.Product-List__column {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.Product-List__edit {
+    position: relative;
+}
+.Product-List__delete, .Product-List__edit {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 30px;
+}
+
+.Product-List__panel-button {
+    height: 38px;
+    margin-left: 10px;
+    margin-right: 20px;
+    padding: 0 10px;
+    line-height: 34px;
+}
+
+.list-group .fa {
+    color: orange;
+}
+
+
+</style>
+
+
+<style>
+@media (min-width: 576px){
+  .impressoes-width {
+    max-width: 1200px;
+  }
+}
+
+</style>
+
+
+  <div class="content">
+    <div class="animated fadeIn">
+      <div class="row">
+        <div class='col-lg-2'>
+          <nav class="User-Sidebar Container Container--no-padding">
+
+          <div class="User-Sidebar__cover-container">
+            <img class="User-Sidebar__cover js-sidebar-header-preview" src="https://photos.enjoei.com.br/beeprinted/276x70/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9oZWFkZXJzLzY3MTE5MTAvNTY5MGMxM2M1MmJlOTE2MDNhMTQ0ZDg0MWYyMzE0ZTkuanBn" alt="Czm6ly9wag90b3muzw5qb2vplmnvbs5ici9ozwfkzxjzlzy3mte5mtavnty5mgmxm2m1mmjlote2mdnhmtq0zdg0mwyymze0ztkuanbn">
+          </div>
+          <div class='User-Sidebar__avatar Avatar Avatar--xlarge Avatar--bordered js-sidebar-avatar-preview'>
+          <a href=<%=profile_path(@order.user)%>><%=profile_avatar_select(@order.user)%></a>
+          </div>
+          <div class="User-Sidebar__info" style='padding-bottom:10px'>
+            <a href=<%=profile_path(@order.user)%>><p style='font-weight:bold;background-color:orange; color:white'>Responsável</p></a>
+            <h2 class="User-Sidebar__name"><%=@order.user.name%></h2>
+            <p class="User-Sidebar__since"> entrou em <%=@order.user.created_at.strftime("%d/%m/%Y")%></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item User-Sidebar__since">
+                    <strong><i class="fa fa-envelope"></i> Email</strong><span class="pull-right"><%=@order.user.email%></span>
+                  </li>
+                  <li class="list-group-item User-Sidebar__since">
+                    <strong><i class="fa fa-phone-square"></i> Telefone</strong><span class="pull-right"><%=@order.user.telefone%></span>
+                  </li>
+          </ul>
+
+        </nav>
+        <nav class="User-Sidebar Container Container--no-padding" style='margin-top:15px'>
+          <button class='btn btn-default font-bold w3-center' style='width:100%;font-weight:bold;color:white;background-color:#00c292' data-toggle="modal" data-target="#FinalizarPedido">Finalizar Pedido</button>
+          
+
+          <div class="modal fade" id="FinalizarPedido" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h5 class="modal-title" id="TituloModalCentralizado">Finalizar Pedido</h5>
+                </div>
+                <div class="modal-body">
+                  Você tem certeza que deseja finalizar o pedido #<%=@order.id%>?
+                </div>
+                <%= simple_form_for @order, :method => :post, :url => finalizar_order_path(@order) do |f|%>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default font-bold w3-center" style='font-weight:bold;font-size:11px;color:white;background-color:gray' data-dismiss="modal">Cancelar</button>
+                    <%=f.submit "Finalizar", style:"font-weight:bold;font-size:11px;color:white;background-color:#00c292", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+                  </div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <nav class="User-Sidebar Container Container--no-padding" style=''>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item User-Sidebar__since">
+                <strong><i class="fa fa-bell-o"></i> Pedido</strong><span class="pull-right">#<%=@order.id%></span>
+              </li>
+              <li class="list-group-item User-Sidebar__since">
+                <strong><i class="fa fa-cubes"></i> N° peças</strong><span class="pull-right"><%=@order.pecas.count%></span>
+              </li>
+              <li class="list-group-item User-Sidebar__since">
+                  <strong><i class="fa fa-hourglass-start"></i> Tempo total</strong> <span class="pull-right"><%=@order.pecas.sum { |a| a.quantidade*a.tempo }%> min</span>
+              </li>
+              <li class="list-group-item User-Sidebar__since">
+                <strong><i class="fa fa-balance-scale"></i> Massa Total </strong><span class="pull-right"><%=@order.pecas.sum { |a| a.quantidade*a.massa }%>g</span>
+              </li>
+              <li class="list-group-item User-Sidebar__since">
+                <strong><i class="fa fa-money"></i> Valor </strong><span class="pull-right" style='color:green'>R$<%=@order.preco%></span>
+              </li>
+              <li class="list-group-item User-Sidebar__since">
+                <strong><i class="fa fa-clock-o"></i> DeadLine </strong><span class="pull-right"><strong style='color:red'><%=@order.prazo%></strong></span>
+              </li>
+              <button class='btn btn-default font-bold w3-center' style='font-weight:bold;color:white;background-color:orange' data-toggle="modal" data-target="#EditarPedido">Editar</button>
+            </ul>
+            <div class="modal fade" id="EditarPedido" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h5 class="modal-title" id="TituloModalCentralizado">Editar Pedido</h5>
+                    </div>
+                    <%= render 'form',order: @order %>
+                  </div>
+                </div>
+              </div>
+        </nav>
+
+
+
+        </div>
+        <div class='col-lg-10'>
+          <div class="card" style='width:100%'>
+            <div class='row'>
+              <div class="col-md-4">
+                <h2 class="User-Sidebar__name" style='color:orange;padding: 24px 26px;margin:0px'>Pedido #<%=@order.id%></h2>
+              </div>
+              <div class="col-md-8 text-right" style='float:right'>
+                <ul class="Top-Hat__column Top-Hat__column--no-spaced"> <li class="Top-Hat__tab Top-Hat__tab--stacked is-active"> <a class="Top-Hat__tab__link" href="/perfil/minha-lojinha/a-venda/em-moderacao"> <span class="Top-Hat__tab__title"> Todos </span> </a> </li> <li class="Top-Hat__tab Top-Hat__tab--stacked"> <a class="Top-Hat__tab__link" href="/perfil/minha-lojinha/a-venda/ativos" style='border-left:2px solid #f1f2f7;border-right:2px solid #f1f2f7'> <span class="Top-Hat__tab__title"> impressos </span>  </a> </li> <li class="Top-Hat__tab Top-Hat__tab--stacked"> <a class="Top-Hat__tab__link" href="/perfil/minha-lojinha/a-venda/inativos"> <span class="Top-Hat__tab__title"> a imprimir </span> </a> </li> </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="Container Container--no-padding" style='overflow:inherit;'>
+            <ul class="Product-List">
+            <%@order.pecas.each do |item|%>
+              <%if item != @peca_new%>
+              <li class="Product-List__item js-product-item-container" data-index="0"> 
+                <div class="js-product-item"> 
+                  <div class="Product-List__wrapper">
+                  <div class="row"> 
+                    <div class="Product-List__column col-md-3"> 
+                      <a class="Product-List__image-background" href="/p/drogon-impresso-em-3d-game-of-thrones-30844850"> 
+                        <img class="Product-List__image" src="https://lababertobsb.s3-sa-east-1.amazonaws.com/3dprinting.jpg"> 
+                      </a> 
+                      <div class="Product-List__content"> 
+                        <p class="Product-List__content__title hl-lowercase"><%=item.name%></p>
+                        <p class="Product-List__content__date"> <%=item.massa%>g <%=item.tempo%>min </p>
+                        <p class="Product-List__content__date"> <%=item.quantidade%> unidade(s) </p>
+                        <p class="Product-List__content__date"> <%=item.resolucao%>mm <%=item.infill%>% </p>
+                        <p class="Product-List__content__date"><strong>status</strong></p> 
+
+                      </div>
+
+                    </div>
+
+                    <div class="Product-List__column col-md-7 text-left" style="line-height: 108px;"> 
+                      <ul class="Top-Hat__column Top-Hat__column--no-spaced">
+                        <li class="Top-Hat__tab Top-Hat__tab--stacked"> 
+                          <span class="Top-Hat__tab__link" style='padding-left:0px'> 
+                            <span class="Top-Hat__tab__title"><strong><%=item.quantidade%> unidade(s)</strong></span>  
+                          </span> 
+                        </li>
+                        <li class="Top-Hat__tab Top-Hat__tab--stacked"> 
+                          <span class="Top-Hat__tab__link"> 
+                            <span class="Top-Hat__tab__title"><strong><%=item.material%></strong></span> 
+                          </span> 
+                        </li>
+                        <li class="Top-Hat__tab Top-Hat__tab--stacked"> 
+                          <span class="Top-Hat__tab__link"> 
+                            <span class="Top-Hat__tab__title"><strong><%=item.cor%></strong></span> 
+                          </span> 
+                        </li>
+                        <li class="Top-Hat__tab Top-Hat__tab--stacked"> 
+                          <span class="Top-Hat__tab__link"> 
+                            <span class="Top-Hat__tab__title"><strong><%=item.printings.sum(&:quantidade)%> impresso(s)</strong></span> 
+                          </span> 
+                        </li> 
+                      </ul>
+                    </div>
+
+
+                    <div class="Product-List__column col-md-2 text-right" style="line-height: 108px;">
+                      <ul class="Top-Hat__column Top-Hat__column--no-spaced">
+                        <li class="Top-Hat__tab Top-Hat__tab--stacked middle dropdown" style='z-index:3'> 
+                          <a class="Top-Hat__tab__link" href="" style='background:transparent;padding:20px 16px' id="EditDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > 
+                            <span class="Top-Hat__tab__title" style='color:orange;font-size:24px'> <i class="fa fa-bars" aria-hidden="true"></i> </span>  
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="EditDropdownButton" style='padding:0px; margin:0px'>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#EditPeca_<%=item.id%>" style='padding:10px;' href='#'>Editar</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#VerImpressoes_<%=item.id%>" style='padding:10px;border:1px solid #e2e2e2' href='#'>Impressões</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#ExcluirPeca_<%=item.id%>" style='padding:10px' href='#'>Excluir</a>
+                          </div>
+                        </li>
+                        <li class="Top-Hat__tab Top-Hat__tab--stacked"> 
+                          <a class="Top-Hat__tab__link" href="" title='Ver 3D' style='padding:20px 16px'> 
+                            <span class="Top-Hat__tab__title" style='color:orange;font-size:24px'> <i class="fa fa-eye" aria-hidden="true"></i> </span>  
+                          </a> 
+                        </li>  
+                        <li class="Top-Hat__tab Top-Hat__tab--stacked">
+                          <%= link_to item.attachment.url, download: "#{item.name}.stl", id:'download_file', class:"Top-Hat__tab__link",title:'Download', style: 'padding:20px 16px' do%> 
+                            <span class="Top-Hat__tab__title" style='color:orange;font-size:24px'> <i class="fa fa-cloud-download" aria-hidden="true"></i> </span>
+                          <%end%> 
+                        </li> 
+                      </ul>
+                    </div>
+                  </div> 
+                  </div>   
+                </div> 
+              </li>
+              <div class="modal fade" id="EditPeca_<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h5 class="modal-title" id="TituloModalCentralizado">Editar Peça</h5>
+                    </div>
+                    <%= render 'pecas/form', peca: item, order: @order %>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="VerImpressoes_<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered impressoes-width" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h5 class="modal-title" id="TituloModalCentralizado">Impressões - Peça "<%=item.name%>"</h5>
+                    </div>
+                    <%= render 'printings/form', peca: item, order: @order, printing: @printing_new %>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="ExcluirPeca_<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 class="modal-title" id="TituloModalCentralizado">Excluir Peça</h5>
+                          </div>
+                          <div class="modal-body">
+                            Você tem certeza que deseja excluir a peça "<%=item.name%>"?
+                          </div>
+                          <%= simple_form_for item, :method => :delete do |f|%>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default font-bold w3-center" style='font-weight:bold;font-size:11px;color:white;background-color:gray' data-dismiss="modal">Cancelar</button>
+                              <%=f.submit "Excluir", style:"font-weight:bold;font-size:11px;color:white;background-color:red", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+                            </div>
+                          <%end%>
+                        </div>
+                      </div>
+                    </div>
+              <%end%>
+            <%end%>
+
+
+            </ul>
+          </div>
+
+
+
+          <div class='text-center' style='margin-top:20px'>
+            <button class='btn btn-default font-bold w3-center' style='font-weight:bold;font-size:18px;color:white;background-color:orange' data-toggle="modal" data-target="#NovaPeca"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar Peça</button>
+          </div>
+          <div class="modal fade" id="NovaPeca" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title" id="TituloModalCentralizado">Adicionar Peça</h5>
+                  </div>
+                  <%= render 'pecas/form', peca: @peca_new, order: @order %>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+<%if @rollback_peca_new%>
+<script>
+
+$( document ).ready(function() {
+    $('#NovaPeca').modal('show');
+});
+
+</script>
+<%end%>
+
+
+<%if @rollback_edit_order%>
+<script>
+
+$( document ).ready(function() {
+    $('#EditarPedido').modal('show');
+});
+
+</script>
+<%end%>
+
+
+
+<%@order.pecas.each do |peca|%>  
+  <%if @rollback_peca_edit == peca.id%>
+    <script>
+
+      $( document ).ready(function() {
+          $('#EditPeca_<%=peca.id%>').modal('show');
+      });
+
+    </script>
+  <%end%>
+  <%if @rollback_impressao_new == peca.id%>
+    <script>
+
+      $( document ).ready(function() {
+          $('#VerImpressoes_<%=peca.id%>').modal('show');
+      });
+
+    </script>
+  <%end%>
+<%end%>
+

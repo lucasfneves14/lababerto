@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  tipo: MyString
+  x: 1.5
+  'y': 1.5
+  z: 1.5
+  fechada: false
+  attachment: MyString
+
+two:
+  name: MyString
+  tipo: MyString
+  x: 1.5
+  'y': 1.5
+  z: 1.5
+  fechada: false
+  attachment: MyString

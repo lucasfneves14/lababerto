@@ -112,6 +112,21 @@
             background-color: orange;
             border-color: orange;
         }
+        a{
+            color:orange;
+            cursor:pointer;
+        }
+        .close {
+            color:orange !important;
+        }
+    </style>
+
+    <style>
+        @media (min-width: 576px){
+          .modal-dialog {
+              max-width: 600px;
+              margin: 1.75rem auto;
+          }
     </style>
 
 </head>
@@ -126,18 +141,45 @@
                 <ul class="nav navbar-nav">
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                            <i class="menu-icon fa fa-cubes" title='Pedidos'></i>Pedidos
+                            <i class="menu-icon fa fa-money" title='Pedidos'></i>Pedidos
                         </a>
                         <ul class="sub-menu children dropdown-menu">           
-                            <li><i class="fa fa-puzzle-piece"></i><a href=<%=root_path%>>Todos</a></li>
+                            <li><i class="fa fa-bars"></i><a href=<%=root_path%>>Todos</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                             <i class="menu-icon fa fa-users" title='Colaboradores'></i>Colaboradores
                         </a>
-                        <ul class="sub-menu children dropdown-menu">           
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-user"></i><a href=<%=users_path%>>Usuários</a></li>           
                             <li><i class="fa fa-user-plus"></i><a href=<%=solicitacoes_path%>>Solicitações</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                            <i class="menu-icon fa fa-print" title='Impressoras'></i>Impressoras
+                        </a>
+                        <ul class="sub-menu children dropdown-menu">           
+                            <li><i class="fa fa-bars"></i><a href=<%=printers_path%>>Todas</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                            <i class="menu-icon fa fa-cubes" title='Estoque'></i>Estoque
+                        </a>
+                        <ul class="sub-menu children dropdown-menu"> 
+
+                            <li><i class="fa fa-cube"></i><a href=<%=filamentos_path%>>Filamentos</a></li>          
+                            
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                            <i class="menu-icon fa fa-bar-chart" title='Análise'></i>Análise
+                        </a>
+                        <ul class="sub-menu children dropdown-menu">           
+                            
                         </ul>
                     </li>
                     
@@ -152,7 +194,7 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="https://lababerto.s3-sa-east-1.amazonaws.com/lababerto-completo.jpg" alt="Logo"></a>
+                    <a class="navbar-brand" href=<%=root_path%>><img src="https://lababerto.s3-sa-east-1.amazonaws.com/lababerto-completo.jpg" alt="Logo"></a>
                     <a class="navbar-brand hidden" href="./"><img src="https://beeprinted-stls.s3.amazonaws.com/Plataforma/Assets/Images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -241,8 +283,6 @@
 
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href=<%=profile_path(current_user)%>><i class="fa fa-user"></i>Meu Perfil</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-bell-o"></i>Notifications <span class="count">13</span></a>
 
                             <a class="nav-link" href=<%=edit_user_registration_path%>><i class="fa fa-cog"></i>Editar Conta</a>
 

@@ -1,2 +1,65 @@
-<h1>Orders#index</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
+<style>
+.id, .name, .product{
+    color:#009fab !important;
+}
+
+
+.table-stats table th, .table-stats table td, .name{
+    font-size:11px !important;
+}
+
+.table-stats table th, .table-stats table td{
+
+    text-transform:initial !important;
+}
+
+</style>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#order_prazo" ).datepicker({
+    	dateFormat: 'dd/mm/yy',
+    	dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    	dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    	dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    	monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    	monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    	nextText: 'Próximo',
+    	prevText: 'Anterior'
+    });
+ });
+  </script>
+<div class="content">
+	<h3>Controle de Produção</h3>
+	<hr>
+	<button class='btn btn-default font-bold w3-center' style='font-weight:bold;font-size:14px;color:white;background-color:orange' data-toggle="modal" data-target="#NovoPedido"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar Pedido</button>
+
+	<div class="modal fade" id="NovoPedido" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+	    <div class="modal-dialog modal-dialog-centered" role="document">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+	            <span aria-hidden="true">&times;</span>
+	          </button>
+	          <h5 class="modal-title" id="TituloModalCentralizado">Adicionar Pedido</h5>
+	        </div>
+	        <%= render 'form', order: @order_new %>
+	      </div>
+	    </div>
+  	</div>
+  	<div class="animated fadeIn" style='margin-top:20px'>
+  		<%=render 'pedidos', orders: @orders%>
+  	</div>
+</div>
+
+<%if @rollback%>
+<script>
+
+$( document ).ready(function() {
+    $('#NovoPedido').modal('show');
+});
+
+</script>
+<%end%>

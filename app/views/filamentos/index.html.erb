@@ -1,0 +1,259 @@
+<style>
+.table-stats table th, .table-stats table td {
+    padding: 1em 1.5em;
+    text-align: left;
+}
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th{
+    border: 1px solid #e6ebf1 !important;
+}
+ .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+ 	border: 1px solid #d5dae0;
+ 	border-top:none;
+ }
+</style>
+<div class="content">
+	<h3>Filamentos Cadastrados</h3>
+	<hr>
+	<button class='btn btn-default font-bold w3-center' style='font-weight:bold;font-size:14px;color:white;background-color:orange' data-toggle="modal" data-target="#NovoFilamento"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+
+	<div class="modal fade" id="NovoFilamento" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+	    <div class="modal-dialog modal-dialog-centered" role="document">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+	            <span aria-hidden="true">&times;</span>
+	          </button>
+	          <h5 class="modal-title" id="TituloModalCentralizado">Adicionar Filamento</h5>
+	        </div>
+	        <%= render 'form', filamento: @filamento_new %>
+	      </div>
+	    </div>
+  	</div>
+
+  	<div class="animated fadeIn" style='margin-top:20px'>
+  		<div class="card">
+	  		<div class="card-header">
+	            <strong class="card-title">Filamentos</strong>
+	      	</div>
+	      	<div class="table-stats order-table ov-h">
+	      		<table class="table table-bordered table-hover table-condensed" style='margin-bottom:0px'>
+	      			<thead>
+              			<th class="avatar">Material</th>
+              			<th>Quantidade</th>
+              			<th>Fechados</th>
+              			<th>Cores</th>
+              			<th>Donos</th>
+              			<th>Massa Total</th>
+	      			</thead>
+	      			<tbody>
+	      			<%@groups.each_pair do |material, filamentos|%>
+	      				<tr onclick='if($("#colors_<%=material%>").is(":visible")){$("#colors_<%=material%>").fadeOut();;}else{$("#colors_<%=material%>").fadeIn();}' style='cursor:pointer'>
+		      				<td class="serial"><%=material%></td>
+		      				<td>  <span><%=filamentos.count%></span> </td>
+		      				<td>  <span><%=filamentos.select{|n| n.fechado == true}.count%></span> </td>
+		      				<td>  <span><%=filamentos.group_by(&:cor).count%></span> </td>
+		      				<td>  <span><%=filamentos.group_by(&:dono).count%></span> </td>
+		      				<td style='color:orange'>  <span><%=filamentos.sum(&:massa)%></span> </td>
+	      				</tr>
+	      				<tr class="no-hover" id="colors_<%=material%>" style='display:none'>
+            				<td colspan="100%" class="expanded-row" style='background-color: #f1f2f7 !important'>
+
+								<table class="table table-bordered table-hover table-condensed" sort-table="">
+  									<thead>
+    									<tr>
+    										<th>Cores</th>
+					              			<th>Quantidade</th>
+					              			<th>Fechados</th>
+					              			<th>Donos</th>
+					              			<th>Massa Total</th>
+									   </tr>
+									</thead>
+
+  									<tbody>
+  										<%filamentos.group_by(&:cor).each_pair do |cor, filamentos2|%>
+	    									<tr onclick='if($("#colors_<%=cor%>").is(":visible")){$("#colors_<%=cor%>").fadeOut();;}else{$("#colors_<%=cor%>").fadeIn();}' style='cursor:pointer'>
+	    										<td class='cor-td'><i class="fa fa-futbol-o" aria-hidden="true" style='color:black'></i> <span class='cor'><%=cor%></td>
+	    										<td><%=filamentos2.count%></td>
+	    										<td>  <span><%=filamentos2.select{|n| n.fechado == true}.count%></span> </td>
+	    										<td>  <span><%=filamentos2.group_by(&:dono).count%></span> </td>
+	    										<td style='color:orange'>  <span><%=filamentos2.sum(&:massa)%></span> </td>
+
+										    </tr>
+
+										    <tr class="no-hover" id="colors_<%=cor%>" style='display:none'>
+					            				<td colspan="100%" class="expanded-row" style='background-color: white !important'>
+
+													<table class="table table-bordered table-hover table-condensed" sort-table="">
+					  									<thead>
+					    									<tr>
+					    										<th style='background-color:white'>ID</th>
+										              			<th>Material</th>
+										              			<th>Cor</th>
+										              			<th>Dono</th>
+										              			<th>Fechado?</th>
+										              			<th>Livre?</th>
+										              			<th>Massa</th>
+														   </tr>
+														</thead>
+
+					  									<tbody>
+					  										<%filamentos2.each do |filamento|%>
+						    									<tr style='background-color:white !important'>
+						    										<td><%=filamento.id%></td>
+						    										<td><%=filamento.material%></td>
+						    										<td class='cor-td'><i class="fa fa-futbol-o" aria-hidden="true" style='color:black'></i> <span class='cor'><%=filamento.cor%></span></td>
+						    										<td><%=filamento.dono%></td>
+						    										<td><%if filamento.fechado%><i class="fa fa-check" aria-hidden="true" style='color:green'></i><%else%><i class="fa fa-close" aria-hidden="true" style='color:red'></i><%end%></td>
+						    										<td><%if !filamento.uso%><i class="fa fa-check" aria-hidden="true" style='color:green'></i><%else%><i class="fa fa-close" aria-hidden="true" style='color:red'></i><%end%></td>
+						    										<td style='color:orange'><%=filamento.massa%></td>
+
+															    </tr>
+														    <%end%>
+														</tbody>
+													</table>
+
+					           					 </td>
+					          				</tr>
+
+									    <%end%>
+									</tbody>
+								</table>
+
+           					 </td>
+          				</tr>
+
+	      			<%end%>
+	      			</tbody>
+	      		</table>
+	      	</div>
+	    </div>
+  	</div>
+</div>
+
+
+
+<%if @rollback%>
+<script>
+
+$( document ).ready(function() {
+    $('#NovoFilamento').modal('show');
+});
+
+</script>
+<%end%>
+
+<%@filamentos.each do |filamento|%>  
+  <%if @rollback_edit == filamento.id%>
+    <script>
+
+      $( document ).ready(function() {
+          $('#EditFilamento_<%=filamento.id%>').modal('show');
+      });
+
+    </script>
+  <%end%>
+<%end%>
+
+<script>
+$('.cor').each(function(index, element) {
+    if($(this).text() == 'Azul'){
+      $(this).closest('td').find('.fa').css('color', 'blue');
+      $(this).css('color', 'blue');
+    }
+    else if($(this).text() == 'Vermelho'){
+      $(this).closest('td').find('.fa').css('color', 'red');
+      $(this).css('color', 'red');
+    }
+    else if($(this).text() == 'Verde'){
+      $(this).closest('td').find('.fa').css('color', 'green');
+      $(this).css('color', 'green');
+    }
+    else if($(this).text() == 'Laranja'){
+      $(this).closest('td').find('.fa').css('color', 'orange');
+      $(this).css('color', 'orange');
+    }
+    if($(this).text() == 'Preto'){
+      $(this).closest('td').find('.fa').css('color', 'black');
+      $(this).css('color', 'black');
+    }
+    if($(this).text() == 'Branco'){
+      $(this).closest('td').find('.fa').css('color', "#e2e2e2");
+      $(this).css('color', '#e2e2e2');
+    }
+    if($(this).text() == 'Verde Lima'){
+      $(this).closest('td').find('.fa').css('color', 'green');
+      $(this).css('color', 'green');
+    }
+    if($(this).text() == 'Azul'){
+      $(this).closest('td').find('.fa').css('color', 'blue');
+      $(this).css('color', 'blue');
+    }
+    if($(this).text() == 'Prata'){
+      $(this).closest('td').find('.fa').css('color', '#a1a1a1');
+      $(this).css('color', '#a1a1a1');
+    }
+    if($(this).text() == 'Marmore'){
+      $(this).closest('td').find('.fa').css('color', '#b1b1b1');
+      $(this).css('color', '#b1b1b1');
+    }
+    if($(this).text() == 'Roxo'){
+      $(this).closest('td').find('.fa').css('color', 'purple');
+      $(this).css('color', 'purple');
+    }
+    if($(this).text() == 'Verde Limao'){
+      $(this).closest('td').find('.fa').css('color', 'green');
+      $(this).css('color', 'green');
+    }
+    if($(this).text() == 'Verde Lime'){
+      $(this).closest('td').find('.fa').css('color', 'green');
+      $(this).css('color', 'green');
+    }
+    if($(this).text() == 'Translúcido'){
+      $(this).closest('td').find('.fa').css('color', 'transparent');
+      $(this).css('color', 'transparent');
+    }
+    if($(this).text() == 'Branco Polar'){
+      $(this).closest('td').find('.fa').css('color', '#e2e2e2');
+      $(this).css('color', '#e2e2e2');
+    }
+    if($(this).text() == 'Amarelo'){
+      $(this).closest('td').find('.fa').css('color', 'yellow');
+      $(this).css('color', 'yellow');
+    }
+    if($(this).text() == 'Amarelo Neon'){
+      $(this).closest('td').find('.fa').css('color', 'yellow');
+      $(this).css('color', 'yellow');
+    }
+    if($(this).text() == 'Azul Claro'){
+      $(this).closest('td').find('.fa').css('color', 'blue');
+      $(this).css('color', 'blue');
+    }
+    if($(this).text() == 'Branco Gesso'){
+      $(this).closest('td').find('.fa').css('color', '#e2e2e2');
+      $(this).css('color', '#e2e2e2');
+    }
+    if($(this).text() == 'Marrom'){
+      $(this).closest('td').find('.fa').css('color', 'brown');
+      $(this).css('color', 'brown');
+    }
+    if($(this).text() == 'Rosa'){
+      $(this).closest('td').find('.fa').css('color', 'pink');
+      $(this).css('color', 'pink');
+    }
+    if($(this).text() == 'Madeira'){
+      $(this).closest('td').find('.fa').css('color', 'brown');
+      $(this).css('color', 'brown');
+    }
+    if($(this).text() == 'Bege'){
+      $(this).closest('td').find('.fa').css('color', '#f5f5dc');
+      $(this).css('color', '#f5f5dc');
+    }
+    if($(this).text() == 'Cinza'){
+      $(this).closest('td').find('.fa').css('color', 'gray');
+      $(this).css('color', 'gray');
+    }
+  });
+
+
+
+</script>

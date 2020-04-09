@@ -77,7 +77,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def resolve_layout
     case action_name
-    when "edit"
+    when "edit", "update"
       'system/navbar'
     else
       "users/navbar"

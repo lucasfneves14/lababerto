@@ -18,6 +18,7 @@ class UserController < ApplicationController
 						@user.colaborador = true
 						@user.admin = true
 					end
+					@user.color = Colorizer.colorize(@user.name)
 					@user.save
 					LiberacaoMailer.liberacao_email(@user).deliver
 					flash[:success] = "Um novo #{@user.relacionamento} foi adicionado ao sistema."
@@ -46,6 +47,10 @@ class UserController < ApplicationController
 			@users = User.all.where(colaborador: false)
 			render :solicitacoes
 		end
+	end
+
+	def index
+		@users = User.where(colaborador: true)
 	end
 
 	def show

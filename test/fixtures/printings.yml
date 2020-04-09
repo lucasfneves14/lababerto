@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tempo: 1.5
+  massa: 1.5
+  quantidade: 1
+  resolucao: 1.5
+  infill: 1.5
+  cor: MyString
+  material: MyString
+  filamento: one
+  printer: one
+  user: one
+  order: one
+
+two:
+  tempo: 1.5
+  massa: 1.5
+  quantidade: 1
+  resolucao: 1.5
+  infill: 1.5
+  cor: MyString
+  material: MyString
+  filamento: two
+  printer: two
+  user: two
+  order: two

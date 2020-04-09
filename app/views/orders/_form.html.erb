@@ -1,0 +1,104 @@
+<%= simple_form_for order do |f| %>
+  <div class="modal-body">
+    <div class="card-body">
+      <div id="pay-invoice">
+        <div class="card-body">
+          <%= f.error_notification %>
+          <div class="form-group">
+                <label for="cc-exp" class="control-label mb-1">Colaborador Responsável</label>
+                <%= f.input :user_id, :collection => User.where(colaborador: true).map{|u| ["#{u.name} #{u.email}", u.id]}, required: true, label:false%>
+            </div>
+
+          </div>
+          <hr>
+          <p>Dados do Cliente</p>
+          <div class="form-group">
+                <label for="cc-exp" class="control-label mb-1">Nome</label>
+                <%= f.input :client, required: true, label:false%>
+          </div>
+          <div class="form-group">
+                <label for="cc-exp" class="control-label mb-1">Email</label>
+                <%= f.input :email, required: true, label:false%>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">CPF/CNPJ</label>
+                    <%= f.input :cpf, required: true, label:false%>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Telefone (Opcional)</label>
+                    <%= f.input :telefone, required: true, label:false%>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Cep (Opcional)</label>
+                    <%= f.input :cep, required: true, label:false%>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Estado</label>
+                    <%= f.input :estado, :collection => ["Acre", "Alagoas", "Amapá","Amazonas", "Bahia", "Ceará","Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte","Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Segipe", "Tocantins"], required: true, label:false%>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+                <label for="cc-exp" class="control-label mb-1">Endereço</label>
+                <%= f.input :endereco, required: true, label:false%>
+          </div>
+          <hr>
+          <p>Dados do Pedido</p>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Tipo do Pedido</label>
+                    <%= f.input :tipo, :collection =>["Maker", "Serviço"],  required: true, label:false%>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Canal</label>
+                    <%= f.input :canal,:collection => ["Email","Telefone","Boca a Boca","Site","Whatsapp"], required: true, label:false%>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Prazo do Pedido</label>
+                    <%= f.input :prazo,  required: true, label:false%>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Preço</label>
+                    <%= f.input :preco,  required: true, label:false%>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Frete</label>
+                    <%= f.input :frete,  required: true, label:false%>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+                <label for="cc-exp" class="control-label mb-1">Descrição</label>
+                <%= f.input :descricao, required: true, label:false%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default font-bold w3-center" style='font-weight:bold;font-size:11px;color:white;background-color:gray' data-dismiss="modal">Cancelar</button>
+      <%=f.submit "Enviar", style:"font-weight:bold;font-size:11px;color:white;background-color:orange", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+    </div>
+  <%end%>

@@ -1,0 +1,258 @@
+<style>
+.modal-nova-impressao{
+  font-size:13px;
+}
+
+.modal-nova-impressao select, .modal-nova-impressao input{
+  height:auto;
+  font-size:inherit;
+}
+
+.impressoes.table-stats table td,  .impressoes.table-stats table th{
+  font-size:12px;
+}
+
+.ov-h {
+
+overflow: inherit;
+
+}
+
+.hide-info{
+  display:none;
+}
+
+.middle2 {
+  transition: .5s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+</style>
+  <div class="modal-body modal-nova-impressao">
+    <div class="card-body">
+      <div id="pay-invoice">
+          <div class="row">
+            <div class="col-6" style='border-right:1px solid #e2e2e2'>
+            <%= simple_form_for printing, :url => printings_path(peca.id) do |f| %>
+            <p>Nova Impressão</p>
+            <%= f.error_notification %>
+              <div class='row'>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Colaborador</label>
+                    <%= f.input :user_id,required: true, prompt:"Colaborador", :collection => User.where(colaborador: true).map{|u| ["#{u.name} #{u.email}", u.id]},label:false%>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Impressora</label>
+                    <%= f.input :printer_id,required: true, prompt:"Impressora", :collection => Printer.all.map{|u| ["#{u.name}", u.id]},label:false%>
+                  </div>
+                </div> 
+              </div>
+
+              <div class='row'>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Material</label>
+                    <%= f.input :material,required: true, prompt:"Material", :collection => (Filamento.distinct.pluck(:material)), :selected => peca.material,label:false%>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Cor</label>
+                    <%= f.input :cor,required: true, prompt:"Cor", :collection => (Filamento.distinct.pluck(:cor)), :selected => peca.cor,label:false%>
+                  </div>
+                </div> 
+              </div>
+              <dic class='row'>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Filamento</label>
+                    <%= f.input :filamento_id, prompt:"Filamento", :collection => Filamento.where(material: peca.material).where(cor: peca.cor).map{|u| ["##{u.id} #{u.dono}: #{u.material} #{u.cor} #{u.massa} gramas", u.id]}, required: true, label:false%>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Quantidade</label>
+                    <%= f.input :quantidade,required: true,label:false, :input_html => {value: peca.quantidade}%>
+                  </div>
+                </div>
+              </dic>
+              <div class='row'>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Tempo (minutos)</label>
+                    <%= f.input :tempo,required: true,label:false, :input_html => {value: peca.tempo}%>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Massa (gramas)</label>
+                    <%= f.input :massa,required: true,label:false, :input_html => {value: peca.massa}%>
+                  </div>
+                </div> 
+              </div>
+              <div class='row'>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Resoluçao (mm)</label>
+                    <%= f.input :resolucao,required: true,label:false, :input_html => {value: peca.resolucao}%>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="cc-exp" class="control-label mb-1">Infill (%)</label>
+                    <%= f.input :infill,required: true,label:false, :input_html => {value: peca.infill}%>
+                  </div>
+                </div> 
+              </div>
+              <%=f.submit "Enviar", style:"width:100%;font-weight:bold;font-size:15px;color:white;background-color:orange", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+            <%end%>
+            </div>
+            <div class="col-6">
+              <div class='hide-info' id='img-mono' style='display:block;width:100%;height:100%;position:relative' >
+                <div class='img-preview middle2'>
+                  <img src='https://lababertobsb.s3-sa-east-1.amazonaws.com/logo-mono.jpg'>
+                </div>
+              </div>
+              <%peca.printings.each do |printing|%>
+                <div class="hide-info" id='Excluir_impressao_<%=printing.id%>'>
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="TituloModalCentralizado">Excluir Impressão</h5>
+                  </div>
+
+                  <div class="modal-body">Você tem certeza que deseja excluir a impressão #<%=printing.id%>?</div>
+                  <%= simple_form_for printing, :method => :delete do |f|%>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default font-bold w3-center" style='font-weight:bold;font-size:11px;color:white;background-color:gray' onclick='$(".hide-info").hide();$("#img-mono").fadeIn();'>Cancelar</button>
+                      <%=f.submit "Excluir", style:"font-weight:bold;font-size:11px;color:white;background-color:red", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+                    </div>
+                  <%end%>
+                </div>
+                <div class="hide-info" id='Finalizar_impressao_<%=printing.id%>'>
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="TituloModalCentralizado">Finalizar Impressão</h5>
+                  </div>
+
+                  <div class="modal-body">Você tem certeza que deseja finalizar a impressão #<%=printing.id%>?</div>
+                  <%= simple_form_for printing,:url=>finalizar_printing_path(printing), :method => :post do |f|%>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default font-bold w3-center" style='font-weight:bold;font-size:11px;color:white;background-color:gray' onclick='$(".hide-info").hide();$("#img-mono").fadeIn();'>Cancelar</button>
+                      <%=f.submit "Finalizar", style:"font-weight:bold;font-size:11px;color:white;background-color:#00c292", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+                    </div>
+                  <%end%>
+                </div>
+              <%end%>
+            </div>  
+          </div>
+          <hr>
+          <p>Impressões</p>
+          <div class="impressoes table-stats order-table ov-h">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>ID</th>
+                  <th>Colaborador</th> 
+                  <th>Impressora</th>
+                  <th>Filam.</th>
+                  <th>Mat.</th>
+                  <th>Cor</th>
+                  <th>Quant.</th>
+                  <th>Tempo</th>
+                  <th>Massa</th>
+                  <th>Resol.</th>
+                  <th>Infill</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%peca.printings.each do |printing|%>
+                  <tr>
+                    <td>
+                      <a class="Top-Hat__tab__link" href="" style='padding:0px;background:transparent;' id="EditDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > 
+                        <span class="Top-Hat__tab__title" style='color:orange'> <i class="fa fa-bars" aria-hidden="true"></i> </span>  
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="EditDropdownButton" style='padding:0px; margin:0px'>
+                        <a class="dropdown-item" style='padding:10px;' href='#' onclick='$(".hide-info").hide();$("#Finalizar_impressao_<%=printing.id%>").fadeIn();'>Finalizar</a>
+                        <a class="dropdown-item" style='padding:10px;border:1px solid #e2e2e2' href='#'>Registrar Falha</a>
+                        <a class="dropdown-item" style='padding:10px' href='#' onclick='$(".hide-info").hide();$("#Excluir_impressao_<%=printing.id%>").fadeIn();'>Remover</a>
+                      </div>
+                    </td>
+
+
+                    <td>#<%=printing.id%></td>
+                    <td><a href=<%=profile_path(printing.user)%>><%=printing.user.name%></a></td>
+                    <td><%=printing.printer.name%></td>
+                    <td>#<%=printing.filamento.id%></td>
+                    <td><%=printing.material%></td>
+                    <td><%=printing.cor%></td>
+                    <td><%=printing.quantidade%> un</td>
+                    <td><%=printing.tempo%> min</td>
+                    <td><%=printing.massa%> g</td>
+                    <td><%=printing.resolucao%> mm</td>
+                    <td><%=printing.infill%> %</td>
+                    <td class='text-center' style="font-weight:bold;<%if printing.status == "Imprimindo"%>color:white;background-color:#ab8ce4<%elsif printing.status == "Finalizado"%>color:white;background-color:#00c292<%end%>"><%=printing.status%></td>
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default font-bold w3-center" style='font-weight:bold;font-size:11px;color:white;background-color:gray' data-dismiss="modal">Cancelar</button>
+    </div>
+
+<script>
+$(function() {
+
+   $("select#printing_material, select#printing_cor").change(function() {
+    var id_value_string_material = $("select#printing_material").val();
+    var id_value_string_cor = $("select#printing_cor").val();
+    if ((id_value_string_material == "") || (id_value_string_cor == "")){
+     $("select#printing_filamento_id option").remove();
+     var row = "<option value=\"" + "" + "\">" + "Filamento" + "</option>";
+     $(row).appendTo("select#printing_filamento_id");
+    } else {
+     // Send the request and update course dropdown
+     $.ajax({
+      dataType: "json",
+      cache: false,
+      url: '/estoque/get-filametos/' + id_value_string_material + '/' + id_value_string_cor,
+      timeout: 5000,
+      error: function(XMLHttpRequest, errorTextStatus, error) {
+       alert("Falha ao encontrar filamentos: " + errorTextStatus + " ;" + error);
+      },
+      success: function(data) {
+       // Clear all options from course select
+       $("select#printing_filamento_id option").remove();
+       //put in a empty default line
+       var row = "<option value=\"" + "" + "\">" + "Filamento" + "</option>";
+       $(row).appendTo("select#printing_filamento_id");
+       // Fill course select
+       $.each(data, function(i, j) {
+        row = "<option value=\"" + j.id + "\">" + "#" + j.id  + " " + j.dono + ": " + j.material  + " " + j.cor  + " " + j.massa + " gramas" + "</option>";
+        $(row).appendTo("select#printing_filamento_id");
+        "##{u.id} #{u.dono}: #{u.material} #{u.cor} #{u.massa} gramas"
+
+
+       });
+      }
+     });
+    }
+   });
+
+  });
+
+
+
+</script>

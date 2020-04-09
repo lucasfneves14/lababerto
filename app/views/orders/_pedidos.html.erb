@@ -1,0 +1,84 @@
+<div class="row" style='overflow:auto'>
+	<div class='card'>
+		<div class='card-header'>
+			<strong class="card-title">Pedidos</strong>
+		</div>
+		<div class="table-stats order-table ov-h">
+            <table class="table ">
+            	<thead>
+            		<tr>
+            			<th></th>
+            			<th>ID</th>
+                        <th>Cliente</th>
+                        <th>Canal</th>
+                        <th>Colaborador</th>
+                        <th>Email</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Telefone</th>
+                        <th>Estado</th>
+                        <th>CEP</th>
+                        <th>Endereço</th>
+                        <th>Tipo</th>
+                        <th>Descriçao</th>
+                        <th>Status</th>
+                        <th>Preço</th>
+                        <th>Frete</th>
+                        <th>Criado em</th>
+                        <th>Prazo</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<%orders.each_with_index do |order,index|%>
+            		<tr>
+            			<td><a class='btn btn-default font-bold w3-center' style='font-weight:bold;font-size:14px;color:white;background-color:orange' href=<%=order_path(order.id)%>>Ver mais</a></td>
+						<td><a href=<%=order_path(order.id)%>>#<%=order.id%></a></td>
+						<td><%=order.client%></td>
+						<td><%=order.canal%></td>
+						<td class='text-center' style="font-weight:bold;<%if order.user.color%>background-color:<%=order.user.color%><%end%>"><a href=<%=profile_path(order.user)%> style='color:white;'><%=order.user.name%></a></td>
+						<td><%=order.email%></td>
+						<td><%=order.cpf%></td>
+						<td><%=order.telefone%></td>
+						<td><%=order.estado%></td>
+						<td><%=order.cep%></td>
+						<td width="200"><span>
+							<% if order.endereco.length > 15%>
+								<%= truncate(order.endereco, length: 15) %>
+								<%= link_to "Mais", "", class: "read-more-endereco-#{order.id}" %>
+								<script>
+                                    $('.read-more-endereco-<%= order.id %>').on('click', function(e) {
+                                            e.preventDefault()
+                                           $(this).parent().html('<%= escape_javascript order.endereco %>')
+                                       })
+                                </script>
+                            <%else%>
+								<%=order.endereco%>
+							<%end%>
+						</span></td>
+						<td><%=order.tipo%></td>
+						<td width="200"><span>
+							<% if order.descricao.length > 15%>
+								<%= truncate(order.descricao, length: 15) %>
+								<%= link_to "Mais", "", class: "read-more-order-#{order.id}" %>
+								<script>
+                                    $('.read-more-order-<%= order.id %>').on('click', function(e) {
+                                            e.preventDefault()
+                                           $(this).parent().html('<%= escape_javascript order.descricao %>')
+                                       })
+                                </script>
+                            <%else%>
+								<%=order.descricao%>
+							<%end%>
+						</span></td>
+						<td class='text-center' style="font-weight:bold;<%if order.status == "Parado"%>color:white;background-color:red<%elsif order.status == "Imprimindo"%>color:white;background-color:#ab8ce4<%elsif order.status == "Finalizado"%>color:white;background-color:#00c292<%end%>"><%=order.status%></td>
+						<td><%=order.preco%></td>
+						<td><%=order.frete%></td>
+						<td><%=order.created_at.strftime("%d/%m/%Y")%></td>
+						<td style='color:red'><%=order.prazo%></td>
+					</tr>	
+            		<%end%>
+
+            	</tbody>
+            </table>
+        </div>
+	</div>
+</div>

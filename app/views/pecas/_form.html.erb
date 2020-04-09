@@ -1,0 +1,92 @@
+<%= simple_form_for peca, :id => order do |f| %>
+  <div class="modal-body">
+    <div class="card-body">
+      <div id="pay-invoice">
+        <div class="card-body">
+          <%= f.error_notification %>
+          <div class="form-group">
+                <label for="cc-exp" class="control-label mb-1">Nome</label>
+                <%= f.input :name, required: true, label:false%>
+            </div>
+
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="cc-exp" class="control-label mb-1">Material</label>
+                <%= f.input :material,required: true, prompt:"Material", :collection => (Filamento.distinct.pluck(:material) <<  'Outro'),label:false,:input_html=>{style:'color:#999;margin-bottom:0px; margin-borrom:0px', onChange: "if($(this).val() == 'Outro'){$(this).closest('.row').find('#material_outro').fadeIn()}else{$(this).closest('.row').find('#material_outro').fadeOut()}"} %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group" id='material_outro' style='display:none'>
+                <label for="cc-exp" class="control-label mb-1">Qual?</label>
+                <%= f.input :material_aux,required: true, label:false%>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="cc-exp" class="control-label mb-1">Cor</label>
+                <%= f.input :cor,required: true, prompt:"Cor", :collection => (Filamento.distinct.pluck(:cor) <<  'Outro'),label:false,:input_html=>{style:'color:#999;margin-bottom:0px; margin-borrom:0px', onChange: "if($(this).val() == 'Outro'){$(this).closest('.row').find('#cor_outro').fadeIn()}else{$(this).closest('.row').find('#cor_outro').fadeOut()}"} %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group"  id='cor_outro' style='display:none'>
+                <label for="cc-exp" class="control-label mb-1">Qual?</label>
+                <%= f.input :cor_aux,required: true, label:false%>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="cc-exp" class="control-label mb-1">Resolução (mm)</label>
+                  <%= f.input :resolucao,required: true, label:false%>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="cc-exp" class="control-label mb-1">Infill (%)</label>
+                  <%= f.input :infill,required: true, label:false%>
+                </div>
+              </div>
+            </div>
+          <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="cc-exp" class="control-label mb-1">Massa (gramas)</label>
+                  <%= f.input :massa,required: true, label:false%>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="cc-exp" class="control-label mb-1">Tempo (<strong style='color:red'>minutos</strong>)</label>
+                  <%= f.input :tempo,required: true, label:false%>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="cc-exp" class="control-label mb-1">Quantidade</label>
+                  <%= f.input :quantidade,required: true, label:false%>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="cc-exp" class="control-label mb-1">Arquivo Stl</label>
+                  <%= f.input :attachment,required: true, label:false%>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default font-bold w3-center" style='font-weight:bold;font-size:11px;color:white;background-color:gray' data-dismiss="modal">Cancelar</button>
+      <%=f.submit "Enviar", style:"font-weight:bold;font-size:11px;color:white;background-color:orange", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+    </div>
+  <%end%>

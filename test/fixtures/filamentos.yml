@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  material: MyString
+  cor: MyString
+  dono: MyString
+  massa: 1.5
+  fechado: false
+  diametro: 1.5
+  uso: false
+
+two:
+  material: MyString
+  cor: MyString
+  dono: MyString
+  massa: 1.5
+  fechado: false
+  diametro: 1.5
+  uso: false

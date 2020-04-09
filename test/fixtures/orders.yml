@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  tipo: MyString
+  preco: 1.5
+  client: MyString
+  cpf: MyString
+  canal: MyString
+  email: MyString
+  telefone: MyString
+  estado: MyString
+  cep: MyString
+  descricao: MyText
+  status: MyString
+  entregue: false
+  prazo: MyString
+  frete: MyString
+
+two:
+  user: two
+  tipo: MyString
+  preco: 1.5
+  client: MyString
+  cpf: MyString
+  canal: MyString
+  email: MyString
+  telefone: MyString
+  estado: MyString
+  cep: MyString
+  descricao: MyText
+  status: MyString
+  entregue: false
+  prazo: MyString
+  frete: MyString

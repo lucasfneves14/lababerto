@@ -1,0 +1,77 @@
+<div class="col-sm-3">
+    <div class="card" style='color:#616161'>
+      <label for="user_attachment" id='input-img-label' style='position:relative'>
+        <%if printer.attachment.present?%>
+          <img class='card-img-top' src="<%=printer.attachment.url%>" id='image-preview'>
+        <%else%>
+          <img class='card-img-top' src="https://lababertobsb.s3-sa-east-1.amazonaws.com/3dprinter.jpg" id='image-preview'>
+        <%end%>
+        <div class="middle dropdown" style='z-index:3'>
+            <button class="btn" type="button" id="PrinterDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style='background:transparent'>
+              <i class="fa fa-ellipsis-v" aria-hidden="true" style='font-size:22px;color:orange'></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="PrinterDropdownButton">
+              <a class="dropdown-item" data-toggle="modal" data-target="#EditImpressora_<%=printer.id%>" href='#'>Editar</a>
+              <a class="dropdown-item" data-toggle="modal" data-target="#Excluir_<%=printer.id%>" href='#'>Excluir</a>
+              <!-- Modal -->
+
+
+
+            </div>
+        </div>
+      </label>
+      <div class="card-body">
+        <h4 class="card-title mb-3" style='margin:0 !important'><%=printer.name%></h4>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          Modelo<span class="pull-right"><%=printer.modelo%></span>
+        </li>
+        <li class="list-group-item">
+          Tipo<span class="pull-right"><%=printer.tipo%></span>
+        </li>
+        <li class="list-group-item">
+          Dimensões<span class="pull-right"><%=printer.x%> x <%=printer.y%> x <%=printer.z%> cm</span>
+        </li>
+        <li class="list-group-item">
+          Enclosure<span class="pull-right"><%if printer.fechada == true%>Sim<%else%>Não<%end%></span>
+        </li>
+      </ul>
+    </div>
+</div>
+<div class="modal fade" id="EditImpressora_<%=printer.id%>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title" id="TituloModalCentralizado">Adicionar Impressora</h5>
+        </div>
+        <%= render 'form', printer: printer %>
+      </div>
+    </div>
+  </div>
+
+
+<div class="modal fade" id="Excluir_<%=printer.id%>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="TituloModalCentralizado">Excluir Impressora</h5>
+      </div>
+      <div class="modal-body">
+        Você tem certeza que deseja excluir a impressora <%=printer.name%>?
+      </div>
+      <%= simple_form_for(printer, :method => :delete) do |f|%>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default font-bold w3-center" style='font-weight:bold;font-size:11px;color:white;background-color:gray' data-dismiss="modal">Cancelar</button>
+          <%=f.submit "Excluir", style:"font-weight:bold;font-size:11px;color:white;background-color:red", class:"btn btn-default dropdown-toggle font-bold w3-center" %>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
