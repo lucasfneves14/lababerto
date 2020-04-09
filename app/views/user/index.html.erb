@@ -40,8 +40,8 @@
 	                            </div>
 	                        </td>
                           <td><%=user.matricula%></td>
-	                        <td class="name"><a href=<%=profile_path(current_user)%>><%=user.name%></a></td>
-	                        <td>  <span><a href=<%=profile_path(current_user)%>><%=user.email%></a></span> </td>
+	                        <td class="name"><a href=<%=profile_path(user)%>><%=user.name%></a></td>
+	                        <td>  <span><a href=<%=profile_path(user)%>><%=user.email%></a></span> </td>
                           <td><%=user.curso%></td>
 	                        <td> <span><%=user.created_at.strftime("%d/%m/%Y")%></span> </td>
 	                        <td><span><%= f.input :relacionamento, prompt:"Relacionamento", :collection => ["Administrador", "Colaborador"],label:false,:input_html=>{style:'color:#999;margin-bottom:0px; margin-borrom:0px'} %></span></td>
